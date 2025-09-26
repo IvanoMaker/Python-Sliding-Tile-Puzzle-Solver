@@ -19,4 +19,4 @@ This is the compressed `knowledge.txt` file. This file contains the complete gam
 Each line is split into two parts, the **key** and the **moves**.
 The key is the encoded string for the board state. And the moves are a list of the moves required to solve the puzzle in that configuration.
 Moves are structured like `(n, 'direction')`, where `n` is one of the numbers between 1 and 8, and directions is either `up`, `down`, `left`, and `right`.
-This file contains 181,440 lines, which is exactly half of $`\$9!}`$, or the total number of permutations of 9 tiles (including an empty one).
+This file contains 181,440 lines, which is exactly half of $n!$, or the total number of permutations of 9 tiles (including an empty one).
