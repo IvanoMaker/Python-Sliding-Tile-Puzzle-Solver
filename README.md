@@ -26,4 +26,4 @@ It contains the complete game knowledge of the sliding tile puzzle.
 - Moves are structured like `(n, 'direction')`, where `n` is one of the numbers between 1 and 8,  
   and `direction` is either `up`, `down`, `left`, or `right`.  
 
-This file contains **181,440** lines, which is exactly half of $n!$ (the total number of permutations of 9 tiles, including the empty one).
+This file contains **181,440** lines, which is exactly half of $9!$ (the total number of permutations of 9 tiles, including the empty one).
