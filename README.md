@@ -8,6 +8,8 @@ The number of moves it took to solve the puzzle will be printed in the console.
 |:--:|
 | *A.1 The puzzle being solved* |
 
+## Helper Scripts/Files
+
 ### `heap.py`
 This file contains a class definition for the heap data structure used by A*.
 
