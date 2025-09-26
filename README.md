@@ -10,3 +10,6 @@ The number of moves it took to solve the puzzle will be printed in the console.
 
 ## `heap.py` file
 This file contains a class definition for the heap data structure used by A*.
+
+## `functions.py` file
+This file contains a variety of helper functions used throughout the other files. These include the A* algorithm itself, functions for encoding and decoding the tile data, and and functions to make sure the game state is solvable before attempting to solve it.
