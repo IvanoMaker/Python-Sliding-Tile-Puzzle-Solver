@@ -5,10 +5,10 @@ import sys
 from functions import *
 
 # constants used mostly for pygame
-TILE_SIZE = 100
-GRID_SIZE = 3
-WIDTH = TILE_SIZE * GRID_SIZE
-HEIGHT = TILE_SIZE * GRID_SIZE
+TILE_SIZE = 100                   # size of each tile
+GRID_SIZE = 3                     # 3x3 grid
+WIDTH = TILE_SIZE * GRID_SIZE     # window width
+HEIGHT = TILE_SIZE * GRID_SIZE    # window height
 
 BG_COLOR = (18, 18, 18)         # background color
 TILE_COLOR = (52, 138, 82)      # tile color
