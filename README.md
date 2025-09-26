@@ -24,6 +24,11 @@ It contains the complete game knowledge of the sliding tile puzzle.
 - The key is the encoded string for the board state.  
 - The moves are a list of the moves required to solve the puzzle in that configuration.  
 - Moves are structured like `(n, 'direction')`, where `n` is one of the numbers between 1 and 8,  
-  and `direction` is either `up`, `down`, `left`, or `right`.  
-
+  and `direction` is either `up`, `down`, `left`, or `right`.
+  
 This file contains **181,440** lines, which is exactly half of $9!$ (the total number of permutations of 9 tiles, including the empty one).
+
+## Interactive Files
+
+### `human_version.py`
+This is a basic version of the sliding tile puzzle designed for the user to solve themselves. There is no solving functions in this file. To move a tile, click it and the place it can/could move to is highlighted. Then click the highlighted area and the tile will move.
