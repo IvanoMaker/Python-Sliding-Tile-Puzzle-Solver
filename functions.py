@@ -1,3 +1,5 @@
+# functions file
+# used to holding frequently used functions to prevent needlessly defining them everywhere
 import random
 from heap import BinaryHeap
 
@@ -11,55 +13,54 @@ def tuple_to_board(t):
 
 # Helper functions for solvability and random board generation
 def inversion_count(flat):
-    flat = [n for n in flat if n is not None]
-    count = 0
-    for i in range(len(flat)):
+    flat = [n for n in flat if n is not None]   # ignore the None in the board
+    count = 0                                   # counter for inversions
+    for i in range(len(flat)):                  # iterate through the tiles on the board in sets of 2
         for j in range(i + 1, len(flat)):
-            if flat[i] > flat[j]:
-                count += 1
-    return count
+            if flat[i] > flat[j]:               # if the first tile is greater than the next
+                count += 1                      # increase inversion count
+    return count                                # return inversion count
 
 # return True if a board is solvable
 def is_solvable(board):
-    flat = [tile for row in board for tile in row]
-    inv = inversion_count(flat)
-    return inv % 2 == 0  # 3x3 grid: solvable if inversion count is even
+    flat = [tile for row in board for tile in row]  # flatten board completely
+    inv = inversion_count(flat)                     # get inversion count
+    return inv % 2 == 0                             # solvable if inversion count is even
 
 # generate a random solvable 3x3 board
 def random_solvable_board(grid_size):
-    flat = [1, 2, 3, 4, 5, 6, 7, 8, None]
-    while True:
-        random.shuffle(flat)
+    flat = [1, 2, 3, 4, 5, 6, 7, 8, None]           # set of tiles in order
+    while True:                                     # keep shuffling until a solvable one is found
+        random.shuffle(flat)                         
         board = [flat[i:i + grid_size] for i in range(0, grid_size ** 2, grid_size)]
-        if is_solvable(board):
-            return board
+        if is_solvable(board):                      # if the generated board is solvable
+            return board                            # return board
         
 # Manhattan distance heuristic
 def heuristic_sum(board, grid_size, goal_position):
-    total = 0                       # total Manhattan distance
-    for i in range(grid_size):      # rows
-        for j in range(grid_size):  # columns
-            n = board[i][j]         # tile number
-            if n is not None:              # ignore blank
-                goal_i, goal_j = goal_position[n]         # goal position
-                total += abs(goal_i - i) + abs(goal_j - j) # add distance
-    return total #return total
+    total = 0                                                # total Manhattan distance
+    for i in range(grid_size):                               # rows
+        for j in range(grid_size):                           # columns
+            n = board[i][j]                                  # get tile number
+            if n is not None:                                # ignore if blank
+                goal_i, goal_j = goal_position[n]            # unpack goal position
+                total += abs(goal_i - i) + abs(goal_j - j)   # add distance
+    return total                                             # return total
 
 # Linear conflict heuristic
 def linear_conflict(board, grid_size, goal_positions):
-    conflicts = 0   # count of linear conflicts
-    for i in range(grid_size):  # rows
-        # collect tiles in their goal row
-        row_tiles = []
-        for j in range(grid_size):
-            n = board[i][j]
-            if n is not None and goal_positions[n][0] == i: # if the tile is in its goal row
-                row_tiles.append((j, goal_positions[n][1])) # (current col, goal col)
+    conflicts = 0                                                # count of linear conflicts
+    for i in range(grid_size):                                   # rows
+        row_tiles = []                                           # row tiles array
+        for j in range(grid_size):                               # columns
+            n = board[i][j]                                      # get tile number
+            if n is not None and goal_positions[n][0] == i:      # if the tile isn't None and is in its goal row
+                row_tiles.append((j, goal_positions[n][1]))      # add (current col, goal col) to the row tiles array
         # count inversions in goal columns
-        for a in range(len(row_tiles)):           # for each tile
-            for b in range(a+1, len(row_tiles)):  # compare with subsequent tiles
-                if row_tiles[a][1] > row_tiles[b][1]: # inversion found
-                    conflicts += 1 # increment conflict count
+        for a in range(len(row_tiles)):                          # for each tile
+            for b in range(a+1, len(row_tiles)):                 # compare with subsequent tiles
+                if row_tiles[a][1] > row_tiles[b][1]:            # inversion found
+                    conflicts += 1                               # increment conflict count
 
     # columns
     # same logic as rows but for columns
@@ -74,7 +75,7 @@ def linear_conflict(board, grid_size, goal_positions):
                 if col_tiles[a][1] > col_tiles[b][1]:
                     conflicts += 1
 
-    return conflicts
+    return conflicts                                             # return total conflic count
 
 #Admissible heuristic: Manhattan distance + 2 * linear_conflict
 def heuristic(board, grid_size, goal_positions):
@@ -89,8 +90,8 @@ def find_all_moves(board_t, grid_size):
             if board[i][j] is None:
                 blank_pos = (i, j)
                 break
-        else:
-            continue
+            else:
+                continue
         break
     # Generate neighbors by sliding tiles into the blank
     neighbors = []                                      # list of neighbor board tuples
