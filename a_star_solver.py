@@ -1,7 +1,10 @@
+# a* solver
+# creates a random, solvable board and solves it using the a* algorithm
 import pygame
 import sys
 from functions import *
 
+# constants used mostly for pygame
 TILE_SIZE = 100
 GRID_SIZE = 3
 WIDTH = TILE_SIZE * GRID_SIZE
@@ -52,7 +55,7 @@ solved = False
 
 # main loop
 while True:
-    for event in pygame.event.get():
+    for event in pygame.event.get():      # check if the window is closed
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
@@ -65,7 +68,7 @@ while True:
     elif solution is not None and not solved:
         solved = True
         print('Solution length:', len(solution) - 1)
-
-    draw_puzzle(tile_set)
-    pygame.display.flip()
-    clock.tick(10)
+    
+    draw_puzzle(tile_set)   # call the draw function
+    pygame.display.flip()   # dispaly the updated pygame screen
+    clock.tick(10)          # 10 FPS
