@@ -7,3 +7,6 @@ The number of moves it took to solve the puzzle will be printed in the console.
 | ![alt text](res/puzzle_gif.gif) |
 |:--:|
 | *A.1 The puzzle being solved* |
+
+## `heap.py` file
+This file contains a class definition for the heap data structure used by A*.
