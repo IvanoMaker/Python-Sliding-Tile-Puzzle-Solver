@@ -34,3 +34,6 @@ This file contains **181,440** lines, which is exactly half of $9!$ (the total n
 
 ### `human_version.py`
 This is a basic version of the sliding tile puzzle designed for the user to solve themselves. There is no solving functions in this file. To move a tile, click it and the place it can/could move to is highlighted. Then click the highlighted area and the tile will move.
+
+### `a_star_solver.py`
+This file generates a random solvable sliding tile puzzle configuration and solves it with a*. No user input is required for this program to run, and it will show a visual of the puzzle being solved.
