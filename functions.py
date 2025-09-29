@@ -92,7 +92,6 @@ def find_all_moves(board_t, grid_size):
                 break
             else:
                 continue
-        break
     # Generate neighbors by sliding tiles into the blank
     neighbors = []                                      # list of neighbor board tuples
     for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:          # up, down, left, right
