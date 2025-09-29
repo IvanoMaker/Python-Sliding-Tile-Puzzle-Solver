@@ -37,3 +37,6 @@ This is a basic version of the sliding tile puzzle designed for the user to solv
 
 ### `a_star_solver.py`
 This file generates a random solvable sliding tile puzzle configuration and solves it with a*. No user input is required for this program to run, and it will show a visual of the puzzle being solved.
+
+### `solve_from_file.py`
+This version of the program solves a random solvable sliding tile puzzle by pulling the list of moves requried to solve it from the knowledge.txt file. There is no solving logic used at all in this version of the puzzle. The moves required to solve the configuration are predetermined and pulled from the file at runtime.
