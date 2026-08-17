@@ -17,6 +17,14 @@ void get_coordinates(int index, int *x, int *y) {
     *y = (index - 1) / 3;
 }
 
+int get_index(int x, int y) {
+    if (x < 0 || x > 2 || y < 0 || y > 2) {
+        return -1;
+    }
+
+    return y * 3 + x + 1;
+}
+
 int inversionCount (int *board) {
     int flat[8];
     int j, count = 0;
@@ -60,6 +68,53 @@ int heuristicSum(int *board, int gridSize, struct Position *goal_positions) {
     return total;
 }
 
+int linearConflicts(int *board, int gridSize, struct Position *goal_positions) {
+    int conflicts, n = 0;
+    int temp_n;
+
+    for (int i = 0; i < gridSize; i++) {
+        struct Position row_tiles[3];
+        temp_n = 0;
+        for (int j = 0; j < gridSize; j++) {
+            n = board[get_index(i, j)];
+            if (n != 0 && goal_positions[n].X == i) {
+                struct Position temp = { .X = j, .Y = goal_positions[n].Y };
+                row_tiles[temp_n] = temp;
+                temp_n++;
+            }
+        }
+        for (int a = 0; a < temp_n; a++) {
+            for (int b = a + 1; b < temp_n; b++) {
+                if (row_tiles[a].Y > row_tiles[b].Y) {
+                    conflicts++;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < gridSize; i++) {
+        struct Position col_tiles[3];
+        temp_n = 0;
+        for (int j = 0; j < gridSize; j++) {
+            n = board[get_index(j, i)];
+            if (n != 0 && goal_positions[n].X == i) {
+                struct Position temp = { .X = j, .Y = goal_positions[n].X };
+                col_tiles[temp_n] = temp;
+                temp_n++;
+            }
+        }
+        for (int a = 0; a < temp_n; a++) {
+            for (int b = a + 1; b < temp_n; b++) {
+                if (col_tiles[a].Y > col_tiles[b].Y) {
+                    conflicts++;
+                }
+            }
+        }
+    }
+
+    return conflicts;
+}
+
 int main() {
 
     const int GOAL_BOARD[9] = {1, 2, 3, 4, 5, 6, 7, 8, 0};
@@ -86,6 +141,14 @@ int main() {
         GOAL_POSITIONS[8].X = 1;
         GOAL_POSITIONS[8].Y = 2;
     }
+
+    char input[10];
+
+    printf("Puzzle states (boards) should be entered as a string of 9 numbers, with 0 representing the empty space and each other number being the tiles position. Assume the first place in the string is the top left section of the puzzle, and the last place is the bottom right.\n");
+    printf("Enter board string: ");
+    fgets(input, sizeof(input), stdin);
+
+    printf("You entered: %s", input);
 
     return 0;
 }
